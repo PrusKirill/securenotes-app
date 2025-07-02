@@ -1,3 +1,4 @@
+[![Security Scans](https://github.com/ваш-логин/securenotes-app/actions/workflows/security-scans.yml/badge.svg)](https://github.com/ваш-логин/securenotes-app/actions)
 # SecureNotes - Educational Security Project
 
 ![Python](https://img.shields.io/badge/python-3.12-blue)
