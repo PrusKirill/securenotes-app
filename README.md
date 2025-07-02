@@ -1,1 +1,0 @@
-# securenotes-app
