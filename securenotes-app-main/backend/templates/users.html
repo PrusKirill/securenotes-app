@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header bg-danger text-white">
+        <h2>Sensitive Data Exposure Vulnerability</h2>
+    </div>
+    <div class="card-body">
+        <p class="text-danger">
+            <strong>Warning:</strong> This page demonstrates a security vulnerability by exposing sensitive user data.
+        </p>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Password Hash</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user[0] }}</td>
+                    <td>{{ user[1] }}</td>
+                    <td class="text-danger">{{ user[2] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="alert alert-warning">
+            <strong>Security Risk:</strong> Exposing password hashes allows attackers to perform offline cracking.
+        </div>
+    </div>
+</div>
+{% endblock %}

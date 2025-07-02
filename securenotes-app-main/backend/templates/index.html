@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-4 mb-4">
+        <div class="card vulnerability-card critical">
+            <div class="card-header">
+                SQL Injection
+            </div>
+            <div class="card-body">
+                <p>Search functionality is vulnerable to SQL injection attacks.</p>
+                <a href="/search?q=test" class="btn btn-sm btn-outline-danger">Demo</a>
+                <div class="vuln-description">
+                    <p>Attackers can execute arbitrary SQL commands by manipulating search input.</p>
+                    <p><strong>How to exploit:</strong> Try: <code>' OR 1=1--</code></p>
+                    <p><strong>Solution:</strong> Use parameterized queries.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 mb-4">
+        <div class="card vulnerability-card high">
+            <div class="card-header">
+                Insecure Deserialization
+            </div>
+            <div class="card-body">
+                <p>Session cookies are stored using insecure deserialization.</p>
+                <a href="/set_cookie?data=hello" class="btn btn-sm btn-outline-danger">Set Cookie</a>
+                <a href="/get_cookie" class="btn btn-sm btn-outline-danger ms-2">Get Cookie</a>
+                <div class="vuln-description">
+                    <p>Attackers can craft malicious cookies to execute code on the server.</p>
+                    <p><strong>How to exploit:</strong> Create a malicious serialized object.</p>
+                    <p><strong>Solution:</strong> Use JSON for session data.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 mb-4">
+        <div class="card vulnerability-card medium">
+            <div class="card-header">
+                Path Traversal
+            </div>
+            <div class="card-body">
+                <p>File export functionality allows accessing arbitrary files.</p>
+                <a href="/export?file=note.txt" class="btn btn-sm btn-outline-danger">Demo</a>
+                <div class="vuln-description">
+                    <p>Attackers can access sensitive files by manipulating file paths.</p>
+                    <p><strong>How to exploit:</strong> Try: <code>../../etc/passwd</code></p>
+                    <p><strong>Solution:</strong> Validate and sanitize file paths.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 mb-4">
+        <div class="card vulnerability-card critical">
+            <div class="card-header">
+                Sensitive Data Exposure
+            </div>
+            <div class="card-body">
+                <p>User endpoint exposes sensitive password hashes.</p>
+                <a href="/users" class="btn btn-sm btn-outline-danger">Demo</a>
+                <div class="vuln-description">
+                    <p>Even hashed passwords should not be exposed to users.</p>
+                    <p><strong>Solution:</strong> Never return sensitive data in API responses.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 mb-4">
+        <div class="card vulnerability-card low">
+            <div class="card-header">
+                Broken Authentication
+            </div>
+            <div class="card-body">
+                <p>No account lockout after multiple failed attempts.</p>
+                <a href="#" class="btn btn-sm btn-outline-secondary disabled">Demo</a>
+                <div class="vuln-description">
+                    <p>Allows attackers to brute-force user credentials.</p>
+                    <p><strong>Solution:</strong> Implement account lockout policies.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 mb-4">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                Security Features
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li>HTTPS enforcement</li>
+                    <li>CSRF protection</li>
+                    <li>Security headers</li>
+                    <li>Input validation</li>
+                </ul>
+                <div class="text-center mt-3">
+                    <a href="#" class="btn btn-success disabled">Coming Soon</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

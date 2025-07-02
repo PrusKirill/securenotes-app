@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Security Reports</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        h1 { color: #2c3e50; }
+        .report { border: 1px solid #ddd; padding: 15px; margin-bottom: 20px; }
+        .report h2 { margin-top: 0; }
+        .vulnerability { color: #c0392b; }
+    </style>
+</head>
+<body>
+    <h1>Security Scan Reports</h1>
+
+    <div class="report">
+        <h2>SCA Report (Dependencies)</h2>
+        <div id="sca-report">Loading...</div>
+    </div>
+
+    <div class="report">
+        <h2>SAST Report (Code Analysis)</h2>
+        <div id="sast-report">Loading...</div>
+    </div>
+
+    <!-- Добавьте аналогичные блоки для других отчетов -->
+
+    <script>
+        // Загрузка и отображение отчетов
+        async function loadReport(reportName, elementId) {
+            const response = await fetch(`${reportName}.json`);
+            const data = await response.json();
+
+            let html = '<ul>';
+            if(reportName === 'sca_report') {
+                data.vulnerabilities.forEach(vuln => {
+                    html += `<li class="vulnerability">${vuln.package_name}: ${vuln.vulnerability_id}</li>`;
+                });
+            } else if(reportName === 'bandit_report') {
+                data.results.forEach(result => {
+                    html += `<li class="vulnerability">${result.test_name} in ${result.filename}:${result.line_number}</li>`;
+                });
+            }
+            html += '</ul>';
+
+            document.getElementById(elementId).innerHTML = html;
+        }
+
+        // Загружаем отчеты
+        loadReport('sca_report', 'sca-report');
+        loadReport('bandit_report', 'sast-report');
+    </script>
+</body>
+</html>
